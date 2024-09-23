@@ -10,31 +10,34 @@ const Navbar = () => {
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <button className="btn btn-outline-secondary m-2">🍕 Home</button>
+            <button className="btn btn-outline-secondary m-2 btn-sm">🍕 Home</button>
           </li>
           {token ? (
             <>
               <li className="nav-item">
-                <button className="btn btn-outline-secondary m-2">🔓 Profile</button>
+                <button className="btn btn-outline-secondary m-2 btn-sm">🔓 Profile</button>
               </li>
               <li className="nav-item">
-                <button className="btn btn-outline-secondary m-2">🔒 Logout</button>
+                <button className="btn btn-outline-secondary m-2 btn-sm">🔒 Logout</button>
               </li>
             </>
           ) : (
             <>
               <li className="nav-item">
-                <button className="btn btn-outline-secondary m-2">🔐 Login</button>
+                <button className="btn btn-outline-secondary m-2 btn-sm">🔐 Login</button>
               </li>
               <li className="nav-item">
-                <button className="btn btn-outline-secondary m-2">🔐 Register</button>
+                <button className="btn btn-outline-secondary m-2 btn-sm">🔐 Register</button>
               </li>
             </>
           )}
-          <li className="nav-item">
-            <button className="btn btn-outline-info m-2">🛒 Total: ${total.toLocaleString()}</button>
-          </li>
+         
         </ul>
+      </div>
+      <div class="d-flex justify-content-end">
+            <li className="nav-item">
+            <button className="btn btn-outline-info m-2 btn-sm">🛒 Total: ${total.toLocaleString()}</button>
+            </li>
       </div>
     </nav>
   );
