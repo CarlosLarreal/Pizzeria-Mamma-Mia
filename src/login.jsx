@@ -71,7 +71,7 @@ const LoginPage = () => {
           )}
         </div>
 
-        <button type="submit">Iniciar sesión</button>
+        <button className='Btn' type="submit">Iniciar sesión</button>
       </form>
 
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}

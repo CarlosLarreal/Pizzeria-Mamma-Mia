@@ -6,7 +6,7 @@ const Navbar = () => {
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#191919' }}>
-      <a className="navbar-brand text-white" href="#">🍕 Pizzería Mamma Mia!</a>
+      <a className="navbar-brand text-white m-2 text-decoration-none" href="#">🍕 Pizzería Mamma Mia!</a>
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">

@@ -88,7 +88,7 @@ const RegisterPage = () => {
           )}
         </div>
 
-        <button type="submit">Registrarse</button>
+        <button className='Btn' type="submit">Registrarse</button>
       </form>
 
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
