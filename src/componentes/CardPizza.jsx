@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'; 
 
-const CardPizza = ({ name, price, ingredients, img }) => {
+const CardPizza = ({ name, price, ingredients, img, addToCart }) => {
   return (
     <div className="card" style={{ width: '18rem', margin: '10px' }}>
       <img src={img} className="card-img-top" alt={name} />
@@ -13,7 +14,7 @@ const CardPizza = ({ name, price, ingredients, img }) => {
         <p className="card-text"><strong>Precio: </strong>${price.toLocaleString()}</p>
         <div className='d-flex justify-content-between'>
           <button className="btn btn-outline-danger btn-sm">Ver Más 👀</button>
-          <button className="btn btn-dark btn-sm">🛒 Añadir</button>
+          <button onClick={addToCart} className="btn btn-dark btn-sm">🛒 Añadir</button>
         </div>
       </div>
     </div>
@@ -21,10 +22,12 @@ const CardPizza = ({ name, price, ingredients, img }) => {
 };
 
 CardPizza.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
-  img: PropTypes.string.isRequired
+  img: PropTypes.string.isRequired,
+  addToCart: PropTypes.func.isRequired
 };
 
 export default CardPizza;

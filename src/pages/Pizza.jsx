@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import { useParams } from 'react-router-dom'
 
 const Pizza = () => {
+  const { id } = useParams();
   const [pizza, setPizza] = useState(null); // Estado para almacenar la pizza
   const [loading, setLoading] = useState(true); // Estado para manejar la carga
   const [error, setError] = useState(null); // Estado para manejar errores
+  const { addToCart } = useCart(); 
 
   useEffect(() => {
     
@@ -62,7 +66,7 @@ const Pizza = () => {
               <p className="card-text">{pizza.desc}</p>
               <p className="card-text"><strong>Precio:</strong> ${pizza.price.toLocaleString()}</p>
               <p className="card-text"><strong>Ingredientes:</strong> {pizza.ingredients.join(', ')}</p>
-              <button className="btn btn-dark">🛒 Añadir al Carrito</button> {/* Sin funcionalidad por ahora */}
+              <button onClick={() => addToCart(pizza)} className="btn btn-dark">🛒 Añadir al Carrito</button>
             </div>
           </div>
         </div>

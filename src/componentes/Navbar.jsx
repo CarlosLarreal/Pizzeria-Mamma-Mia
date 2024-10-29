@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
-  const total = 25000;
-  const token = false;
+  const { getTotal } = useCart(); 
+  const total = getTotal();
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#191919' }}>

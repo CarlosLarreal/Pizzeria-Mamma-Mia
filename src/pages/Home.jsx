@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../componentes/Header';
 import CardPizza from '../componentes/CardPizza';
+import { useCart } from '../context/CartContext';
 
 const Home = () => {
   const [pizzas, setPizzas] = useState([]); // Estado para almacenar las pizzas
   const [loading, setLoading] = useState(true); // Estado para manejar la carga
   const [error, setError] = useState(null); // Estado para manejar errores
+  const { addToCart } = useCart();
 
   useEffect(() => {
     // Función para obtener las pizzas desde la API
@@ -62,6 +64,7 @@ const Home = () => {
                 price={pizza.price}
                 ingredients={pizza.ingredients}
                 img={pizza.img}
+                addToCart={() => addToCart(pizza)}
               />
             </div>
           ))}
