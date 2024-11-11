@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { useCart } from '../context/CartContext';
+import { useUser } from '../context/UserContext';
 
 const Cart = () => {
   const { cart, addToCart, removeFromCart, getTotal } = useCart();
+  const { token } = useUser(); 
 
   // Función para aumentar la cantidad de una pizza en el carrito
   const handleIncrease = (id) => {
@@ -14,10 +16,15 @@ const Cart = () => {
   // Función para disminuir la cantidad de una pizza en el carrito
   const handleDecrease = (id) => {
     const item = cart.find((item) => item.id === id);
-    if (item && item.count > 1) {
-      removeFromCart(id); // Quitar una unidad del mismo producto
+    if (item && item.quantity > 1) {
+      // Disminuir la cantidad si es mayor a 1
+      setCart((prevCart) =>
+        prevCart.map((pizza) =>
+          pizza.id === item.id ? { ...pizza, quantity: pizza.quantity - 1 } : pizza
+        )
+      );
     } else {
-      // Eliminar el producto si la cantidad llega a 0
+      // Eliminar el producto si la cantidad llega a 1
       removeFromCart(id);
     }
   };
@@ -64,7 +71,7 @@ const Cart = () => {
       {cart.length > 0 && (
         <div className="mt-4 d-flex justify-content-between align-items-center">
           <h4>Total: ${getTotal().toLocaleString()}</h4>
-          <button className="btn btn-primary">Pagar</button>
+          <button className="btn btn-primary" disabled={!token}>Pagar</button> {/* Botón deshabilitado si token es false */}
         </div>
       )}
     </div>

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
 
 const RegisterPage = () => {
+  const { token } = useUser();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -10,6 +13,9 @@ const RegisterPage = () => {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
+  if (token) {
+    return <Navigate to="/" />;
+  }
  
   const handleChange = (e) => {
     setFormData({
