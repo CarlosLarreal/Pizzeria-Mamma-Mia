@@ -3,19 +3,19 @@ import { Navigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 
 const LoginPage = () => {
-  const { token } = useUser();
+  const { token, login } = useUser();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
-  
+  const [serverError, setServerError] = useState('');
+
+  // Redirigir a la página de inicio si el usuario ya está autenticado
   if (token) {
     return <Navigate to="/" />;
   }
-
 
   const handleChange = (e) => {
     setFormData({
@@ -36,22 +36,29 @@ const LoginPage = () => {
     return formErrors;
   };
 
-  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length === 0) {
-      setSuccessMessage('Inicio de sesión exitoso');
-      setErrors({});
+      try {
+        await login(formData.email, formData.password);
+        setSuccessMessage('Inicio de sesión exitoso');
+        setErrors({});
+        setServerError('');
+      } catch (error) {
+        setServerError('Error de autenticación. Verifica tus credenciales.');
+        setSuccessMessage('');
+      }
     } else {
       setErrors(validationErrors);
       setSuccessMessage('');
+      setServerError('');
     }
   };
 
   return (
-    <div className='login'>
+    <div className="login">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -78,10 +85,11 @@ const LoginPage = () => {
           )}
         </div>
 
-        <button className='Btn' type="submit">Iniciar sesión</button>
+        <button className="Btn" type="submit">Iniciar sesión</button>
       </form>
 
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      {serverError && <p style={{ color: 'red' }}>{serverError}</p>}
     </div>
   );
 };
